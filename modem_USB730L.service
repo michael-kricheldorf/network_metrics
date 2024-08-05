@@ -1,0 +1,6 @@
+[Unit]
+Description=Python program 'modem_USB730L.py' that polls the USB730L modem for 
+
+[Service]
+Type=simple
+ExecStart=/home/ubuntu/miscellaneous/network_metrics/modem_USB730L.py

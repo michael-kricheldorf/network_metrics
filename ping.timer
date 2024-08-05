@@ -1,0 +1,15 @@
+[Unit]
+Description=Run ping.service at absolute times
+
+[Timer]
+OnCalendar=*-*-* 5:30:00
+OnCalendar=*-*-* 8:30:00
+OnCalendar=*-*-* 11:30:00
+OnCalendar=*-*-* 14:30:00
+OnCalendar=*-*-* 17:30:00
+OnCalendar=*-*-* 20:30:00
+OnCalendar=*-*-* 23:30:00
+
+
+[Install]
+WantedBy=timers.target

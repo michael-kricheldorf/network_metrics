@@ -1,0 +1,15 @@
+[Unit]
+Description=Run modem_USB730L.service at set time
+
+[Timer]
+OnCalendar=*-*-* 5:00:00
+OnCalendar=*-*-* 8:00:00
+OnCalendar=*-*-* 11:00:00
+OnCalendar=*-*-* 14:00:00
+OnCalendar=*-*-* 17:00:00
+OnCalendar=*-*-* 20:00:00
+OnCalendar=*-*-* 23:00:00
+
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,9 @@
+[Unit]
+Description=Runs tncattach 60 seconds after boot
+
+[Timer]
+OnBootSec=60sec
+Unit=tncattach.service
+
+[Install]
+WantedBy=multi-user.target

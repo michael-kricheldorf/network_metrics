@@ -1,0 +1,13 @@
+[Unit]
+Description=Runs tncattach 60 seconds after boot
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ubuntu/miscellaneous/gateways/remote-access/
+ExecStart=/home/ubuntu/miscellaneous/gateways/remote-access/lora-radio.sh
+Restart=always
+TimeoutSec=120
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,14 @@
+[Unit]
+Description=Python 'rnode.py' program that logs the signal strength between two LoRa connected devices
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ubuntu/miscellaneous/network_metrics
+ExecStart=/usr/bin/python3 -u /home/ubuntu/miscellaneous/network_metrics/rnode.py
+Restart=always
+TimeoutSec=120
+RestartSec=5
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target
