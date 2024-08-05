@@ -46,7 +46,17 @@ Note: this should only need to be done once. You can confirm by running the comm
 8. If it displays, woohoo! Ready for [[AT Commands]], if not, then scream and pull the fire alarm
 
 ### Setting up logging scripts
-Note: Make sure that the `ping_config.json` is configured properly
+`sudo rm -rf tncattach`
+`git clone https://github.com/michael-kricheldorf/tncattach.git`
+`cd tncattach`
+`make`
+`sudo make install`
+
+`cd ~/miscellaneous`
+`git clone https://github.com/michael-kricheldorf/network_metrics.git`
+
+
+Make sure that the `ping_config.json` is configured properly
 
 #### Installing `systemd` unit files
 While in the `miscellaneous/network_metrics` directory:
