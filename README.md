@@ -50,9 +50,10 @@ Note: Make sure that the `ping_config.json` is configured properly
 
 #### Installing `systemd` unit files
 While in the `miscellaneous/network_metrics` directory:
-1. `sudo cp modem_USB730L.service modem_USB730L.timer ping.service ping.timer rnode.service tncattach.service tncattach.timer /etc/systemd/system/`
-2. `sudo systemctl daemon-reload`
-3. `sudo systemctl enable ping.timer`
-4. `sudo systemctl enable rnode.service`
-5. `sudo systemctl enable tncattach.timer`
-6. `sudo reboot`
+1. `crontab -e` and command out the bottom lines for `lora-radio.sh`
+2. `sudo cp modem_USB730L.service modem_USB730L.timer ping.service ping.timer rnode.service tncattach.service tncattach.timer /etc/systemd/system/`
+3. `sudo systemctl daemon-reload`
+4. `sudo systemctl enable ping.timer`
+5. `sudo systemctl enable rnode.service`
+6. `sudo systemctl enable tncattach.timer`
+7. `sudo reboot`
