@@ -8,6 +8,7 @@ written by Håkon Løvdal (hlovdal@users.sourceforge.net)
 https://atinout.sourceforge.net/
 
 TODO: split each cmd into its own table
+TODO: add cmd line support for changing device port, e.g. /dev/ttyUSB0
 '''
 
 import serial
@@ -16,10 +17,10 @@ import datetime
 import os
 import sqlite3
 
-script_path = "/home/ubuntu/miscellaneous/network_metrics/"
+script_path = os.getcwd()
 
 cmd_list = ['AT', 'AT+CIND?', 'AT+VZWRSRP?', 'AT+VZWRSRQ?']
-database_filename = script_path + "modem_log.db"
+database_filename = script_path + "/modem_log.db"
 table_name = "modem"
 
 def split_response(r):
@@ -81,3 +82,4 @@ for cmd in cmd_list:
     con.commit()
     
 modem.close()
+sys.exit()

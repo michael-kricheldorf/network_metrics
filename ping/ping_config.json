@@ -1,0 +1,55 @@
+{
+    "addresses": [
+        {
+            "alias":"diana",
+            "type":"lora-radio",
+            "address":"10.10.101.2",
+            "settings": [
+                {
+                    "payload_size": 32,
+                    "ping_count": 5,
+                    "timeout_after": 3,
+                    "interval": 0.5
+                },
+                {
+                    "payload_size": 64,
+                    "ping_count": 5,
+                    "timeout_after": 3,
+                    "interval": 1
+                },
+                {
+                    "payload_size": 128,
+                    "ping_count": 5,
+                    "timeout_after": 3,
+                    "interval": 2
+                }
+            ]
+        },
+        {
+            "alias":"norvel",
+            "type":"nebula",
+            "address":"10.10.200.7",
+            "settings": [
+                {
+                    "payload_size": 64,
+                    "ping_count": 5,
+                    "timeout_after": 3,
+                    "interval": 0.5
+                }
+            ]
+        },
+        {
+            "alias":"michael",
+            "type":"nebula",
+            "address":"10.10.200.13",
+            "settings": [
+                {
+                    "payload_size": 128,
+                    "ping_count": 5,
+                    "timeout_after": 3,
+                    "interval": 0.5
+                }
+            ]
+        }
+    ]
+}

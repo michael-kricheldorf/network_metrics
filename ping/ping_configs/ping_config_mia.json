@@ -1,0 +1,43 @@
+{
+    "addresses": [
+        {
+            "alias":"norvel",
+            "type":"lora-radio",
+            "address":"10.10.101.1",
+            "settings": [
+                {
+                    "payload_size": 64,
+                    "ping_count": 5,
+                    "timeout_after": 10,
+                    "interval": 3
+                }
+            ]
+        },
+        {
+            "alias":"github",
+            "type":"lte-modem",
+            "address":"github.com",
+            "settings": [
+                {
+                    "payload_size": 64,
+                    "ping_count": 5,
+                    "timeout_after": 10,
+                    "interval": 3
+                }
+            ]
+        },
+        {
+            "alias":"virginia-tech",
+            "type":"lte-modem",
+            "address":"vt.edu",
+            "settings": [
+                {
+                    "payload_size": 64,
+                    "ping_count": 5,
+                    "timeout_after": 10,
+                    "interval": 3
+                }
+            ]
+        }
+    ]
+}

@@ -10,12 +10,10 @@ import os
 import re
 import json
 
-script_path = "/home/ubuntu/miscellaneous/network_metrics/"
-
-config_filename = script_path + "ping_config.json"
-
-database_filename = ""
-table_name = ""
+script_path = os.getcwd()
+config_filename = script_path + "/ping_config.json"
+database_filename = script_path + "ping_log.db"
+table_name = "latency"
 
 # Create dictionary from JSON config file
 config = {}
@@ -23,9 +21,6 @@ config = {}
 try:
     with open(config_filename, 'r') as file:
         config = json.load(file)
-
-        database_filename = config['database']
-        table_name = config['table']
 
 except:
     print("Error opening JSON file")

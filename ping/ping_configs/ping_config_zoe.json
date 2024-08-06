@@ -1,0 +1,82 @@
+{
+    "addresses": [
+        {
+            "alias":"diana",
+            "type":"lora-radio",
+            "address":"10.10.101.2",
+            "settings": [
+                {
+                    "payload_size": 64,
+                    "ping_count": 5,
+                    "timeout_after": 3,
+                    "interval": 1
+                }
+            ]
+        },
+        {
+            "alias":"lighthouse",
+            "type":"nebula",
+            "address":"10.10.200.1",
+            "settings": [
+                {
+                    "payload_size": 64,
+                    "ping_count": 5,
+                    "timeout_after": 3,
+                    "interval": 0.5
+                }
+            ]
+        },
+        {
+            "alias":"norvel",
+            "type":"nebula",
+            "address":"10.10.200.7",
+            "settings": [
+                {
+                    "payload_size": 64,
+                    "ping_count": 5,
+                    "timeout_after": 3,
+                    "interval": 0.5
+                }
+            ]
+        },
+        {
+            "alias":"henrietta",
+            "type":"nebula",
+            "address":"10.10.200.11",
+            "settings": [
+                {
+                    "payload_size": 64,
+                    "ping_count": 5,
+                    "timeout_after": 3,
+                    "interval": 0.5
+                }
+            ]
+        },
+        {
+            "alias":"annie",
+            "type":"nebula",
+            "address":"10.10.200.6",
+            "settings": [
+                {
+                    "payload_size": 64,
+                    "ping_count": 5,
+                    "timeout_after": 3,
+                    "interval": 0.5
+                }
+            ]
+        },
+        {
+            "alias":"bjorn",
+            "type":"nebula",
+            "address":"10.10.200.5",
+            "settings": [
+                {
+                    "payload_size": 64,
+                    "ping_count": 5,
+                    "timeout_after": 3,
+                    "interval": 0.5
+                }
+            ]
+        }
+    ]
+}

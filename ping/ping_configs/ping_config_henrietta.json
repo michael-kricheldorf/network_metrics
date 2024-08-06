@@ -1,36 +1,22 @@
 {
-    "database":"/home/ubuntu/miscellaneous/network_metrics/ping_log.db",
-    "table":"latency",
     "addresses": [
         {
-            "alias":"diana",
-            "type":"lora-radio",
-            "address":"10.10.101.2",
+            "alias":"github",
+            "type":"lte-modem",
+            "address":"github.com",
             "settings": [
-                {
-                    "payload_size": 32,
-                    "ping_count": 5,
-                    "timeout_after": 3,
-                    "interval": 0.5
-                },
                 {
                     "payload_size": 64,
                     "ping_count": 5,
                     "timeout_after": 3,
                     "interval": 1
-                },
-                {
-                    "payload_size": 128,
-                    "ping_count": 5,
-                    "timeout_after": 3,
-                    "interval": 2
                 }
             ]
         },
         {
-            "alias":"norvel",
-            "type":"nebula",
-            "address":"10.10.200.7",
+            "alias":"virginia-tech",
+            "type":"lte-modem",
+            "address":"vt.edu",
             "settings": [
                 {
                     "payload_size": 64,
@@ -41,12 +27,25 @@
             ]
         },
         {
-            "alias":"michael",
-            "type":"nebula",
-            "address":"10.10.200.13",
+            "alias":"norvel",
+            "type":"lora-radio",
+            "address":"10.10.101.1",
             "settings": [
                 {
-                    "payload_size": 128,
+                    "payload_size": 64,
+                    "ping_count": 5,
+                    "timeout_after": 10,
+                    "interval": 3
+                }
+            ]
+        },
+        {
+            "alias":"lighthouse",
+            "type":"nebula",
+            "address":"10.10.200.1",
+            "settings": [
+                {
+                    "payload_size": 64,
                     "ping_count": 5,
                     "timeout_after": 3,
                     "interval": 0.5
