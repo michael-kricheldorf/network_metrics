@@ -3,8 +3,8 @@ Description=Python 'rnode.py' program that logs the signal strength between two 
 
 [Service]
 Type=simple
-WorkingDirectory=/home/ubuntu/miscellaneous/network_metrics
-ExecStart=/usr/bin/python3 -u /home/ubuntu/miscellaneous/network_metrics/rnode.py
+WorkingDirectory=/home/ubuntu/miscellaneous/network_metrics/rnode
+ExecStart=/usr/bin/python3 -u /home/ubuntu/miscellaneous/network_metrics/rnode/rnode.py
 Restart=always
 TimeoutSec=120
 RestartSec=5
