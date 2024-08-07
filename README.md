@@ -3,6 +3,7 @@ This repo was made to log ping latencies, RNode Last Received RSSI's, and USB730
 Clone this repository into the `miscellaneous` directory of the gateway, and the assumption is that the gateway has the username `ubuntu`
 
 #### Update and Install Dependencies (or nothing will work!)
+ - `sudo vi /etc/apt/sources.list` and then uncomment the first line starting with deb-src
  - `sudo apt-get update`
  - `sudo apt-get upgrade`
  - `sudo ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime`
@@ -11,13 +12,14 @@ Clone this repository into the `miscellaneous` directory of the gateway, and the
 #### Setting up the USB730L Driver
 These commands were modified and updated to kernel version 5.15.0 from the instructions found on [Verizon's USB730L Integration Guide](https://scache.vzw.com/dam/support/pdf/verizon-usb730l-integration-guide.pdf)
 
+ - run `uname -r`, if the kernel version is something like `5.15.0...`, run `cd miscellaneous/network_metrics/modem_USB730L/` and skip to the step starting with `sudo cp option.c`
  - `cd /tmp/`
  - `sudo apt source linux`
  - `cd /tmp/linux-5.15.0/drivers/usb/serial/`
  - open `option.c` in Vim editor `sudo vi option.c`
  - paste `#define NOVATELWIRELESS_PRODUCT_ENTERPRISE_U730L 0x9032` below the line `/* NOVATEL WIRELESS PRODUCTS */`
  - find the line `static const struct usb_device_id option_ids[ ]` by typing `/` to go into `search mode` and typing that statement. Press `ENTER` when its found
- - insert `{USB_DEVICE_AND_INTERFACE_INFO(NOVATELWIRELESS_VENDOR_ID, NOVATELWIRELESS_PRODUCT_ENTERPRISE_U730L, 0xff, 0x0, 0x0)},` at the top of the file
+ - insert `{USB_DEVICE_AND_INTERFACE_INFO(NOVATELWIRELESS_VENDOR_ID, NOVATELWIRELESS_PRODUCT_ENTERPRISE_U730L, 0xff, 0x0, 0x0)},` at the top of the struct
  - `sudo cp option.c usb-wwan.h /usr/src/linux-headers-5.15.0-107-generic/drivers/usb/serial/`
  - `cd /lib/modules/5.15.0-107-generic/`
  - `sudo ln -fs build /usr/src/linux-headers-5.15.0-107-generic/`
