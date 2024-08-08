@@ -3,4 +3,5 @@ Description=Python 'ping.py' program that logs user-to-user latency
 
 [Service]
 Type=simple
-ExecStart=/home/ubuntu/miscellaneous/network_metrics/ping/ping.py
+WorkingDirectory=/home/ubuntu/miscellaneous/network_metrics/ping
+ExecStart=/usr/bin/python3 -u /home/ubuntu/miscellaneous/network_metrics/ping/ping.py

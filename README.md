@@ -6,6 +6,7 @@ Clone this repository into the `miscellaneous` directory of the gateway, and the
  - `sudo vi /etc/apt/sources.list` and then uncomment the first line starting with deb-src
  - `sudo apt-get update`
  - `sudo apt-get upgrade`
+ - `sudo reboot`
  - `sudo ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime`
  - `sudo apt-get install tzdata libncurses-dev flex bison openssl libssl-dev dkms libelf-dev libudev-dev libpci-dev libiberty-dev autoconf usb-modeswitch dwarves`
 
@@ -21,12 +22,12 @@ These commands were modified and updated to kernel version 5.15.0 from the instr
  - find the line `static const struct usb_device_id option_ids[ ]` by typing `/` to go into `search mode` and typing that statement. Press `ENTER` when its found
  - insert `{USB_DEVICE_AND_INTERFACE_INFO(NOVATELWIRELESS_VENDOR_ID, NOVATELWIRELESS_PRODUCT_ENTERPRISE_U730L, 0xff, 0x0, 0x0)},` at the top of the struct
  - `sudo cp option.c usb-wwan.h /usr/src/linux-headers-$(uname -r)/drivers/usb/serial/`
- - `cd /lib/modules/$(uname -r)/`
- - `sudo ln -fs build /usr/src/linux-headers-$(uname -r)/`
+ #- `cd `
+ - `sudo ln -fs /lib/modules/$(uname -r)/build /usr/src/linux-headers-$(uname -r)/`
  - `cd /lib/modules/$(uname -r)/build/drivers/usb/serial/`
  - `sudo cp Makefile Makefile-orig`
  - `sudo truncate -s 0 Makefile`
- - `echo "obj.m += option.o" | sudo tee Makefile`
+ - `echo "obj-m += option.o" | sudo tee Makefile`
  - `cd /lib/modules/$(uname -r)/build`
  - [`sudo cp /sys/kernel/btf/vmlinux /usr/lib/modules/$(uname -r)/build`](https://askubuntu.com/questions/1348250/skipping-btf-generation-xxx-due-to-unavailability-of-vmlinux-on-ubuntu-21-04)
  - `sudo make -C /lib/modules/$(uname -r)/build M=/usr/src/linux-headers-$(uname -r)/drivers/usb/serial/`
@@ -34,10 +35,14 @@ These commands were modified and updated to kernel version 5.15.0 from the instr
  - `sudo depmod -a`
 
 #### Changing the USB730L to Enterprise Mode
-Note: this should only need to be done once. You can confirm by running the command `lsusb` and searching for the Novatel Wireless device. You should follow these instructions if it has a vendor:product number of `1410:9030`, if the vendor:product number is `1410:9032`, you can ignore the next steps
-
- - `sudo rmmod rndis_host`
+ - `sudo rmmod rndis_host`, device may freeze for a few minutes or lose connection, be patient
+You can confirm by running the command `lsusb` and searching for the Novatel Wireless device. You should follow these instructions if it has a vendor:product number of `1410:9030`:
  - `sudo usb_modeswitch -v 0x1410 -p 0x9030 -u 4`
+
+If the vendor:product number is `1410:9032`, call the following command:
+ - `sudo usb_modeswitch -v 0x1410 -p 0x9032 -u 4`
+
+Then reboot the device to ensure the changes have been made.
  - `sudo reboot` <- find other command that doesn't require a whole reboot maybe
 
 #### Locating the USB730L 

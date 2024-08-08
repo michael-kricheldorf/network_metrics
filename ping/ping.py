@@ -7,12 +7,13 @@ import sqlite3
 import io
 import sys
 import os
+import pathlib
 import re
 import json
 
-script_path = os.getcwd()
-config_filename = script_path + "/ping_config.json"
-database_filename = script_path + "ping_log.db"
+script_path = pathlib.Path.cwd().name
+config_filename = "ping_config.json"
+database_filename = "/ping_log.db"
 table_name = "latency"
 
 # Create dictionary from JSON config file
@@ -21,9 +22,9 @@ config = {}
 try:
     with open(config_filename, 'r') as file:
         config = json.load(file)
-
+    
 except:
-    print("Error opening JSON file")
+    print("Error opening JSON file: ", config_filename)
 
 # connect to SQL database
 con = sqlite3.connect(database_filename)
