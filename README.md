@@ -20,17 +20,17 @@ These commands were modified and updated to kernel version 5.15.0 from the instr
  - paste `#define NOVATELWIRELESS_PRODUCT_ENTERPRISE_U730L 0x9032` below the line `/* NOVATEL WIRELESS PRODUCTS */`
  - find the line `static const struct usb_device_id option_ids[ ]` by typing `/` to go into `search mode` and typing that statement. Press `ENTER` when its found
  - insert `{USB_DEVICE_AND_INTERFACE_INFO(NOVATELWIRELESS_VENDOR_ID, NOVATELWIRELESS_PRODUCT_ENTERPRISE_U730L, 0xff, 0x0, 0x0)},` at the top of the struct
- - `sudo cp option.c usb-wwan.h /usr/src/linux-headers-5.15.0-107-generic/drivers/usb/serial/`
- - `cd /lib/modules/5.15.0-107-generic/`
- - `sudo ln -fs build /usr/src/linux-headers-5.15.0-107-generic/`
- - `cd /lib/modules/5.15.0-107-generic/build/drivers/usb/serial/`
+ - `sudo cp option.c usb-wwan.h /usr/src/linux-headers-$(uname -r)/drivers/usb/serial/`
+ - `cd /lib/modules/$(uname -r)/`
+ - `sudo ln -fs build /usr/src/linux-headers-$(uname -r)/`
+ - `cd /lib/modules/$(uname -r)/build/drivers/usb/serial/`
  - `sudo cp Makefile Makefile-orig`
  - `sudo truncate -s 0 Makefile`
- - `sudo vi Makefile` and then press `i` to enter `insert mode` and type `obj-m += option.o`, press ESC, then save/exit using `:wq`
- - `cd /lib/modules/5.15.0-107-generic/build`
- - [`sudo cp /sys/kernel/btf/vmlinux /usr/lib/modules/5.15.0-107-generic/build`](https://askubuntu.com/questions/1348250/skipping-btf-generation-xxx-due-to-unavailability-of-vmlinux-on-ubuntu-21-04)
- - `sudo make -C /lib/modules/5.15.0-107-generic/build M=/usr/src/linux-headers-5.15.0-107-generic/drivers/usb/serial/`
- - `sudo cp /usr/src/linux-headers-5.15.0-107-generic/drivers/usb/serial/option.ko /lib/modules/5.15.0-107-generic/kernel/drivers/usb/serial/`
+ - `echo "obj.m += option.o" | sudo tee Makefile`
+ - `cd /lib/modules/$(uname -r)/build`
+ - [`sudo cp /sys/kernel/btf/vmlinux /usr/lib/modules/$(uname -r)/build`](https://askubuntu.com/questions/1348250/skipping-btf-generation-xxx-due-to-unavailability-of-vmlinux-on-ubuntu-21-04)
+ - `sudo make -C /lib/modules/$(uname -r)/build M=/usr/src/linux-headers-$(uname -r)/drivers/usb/serial/`
+ - `sudo cp /usr/src/linux-headers-$(uname -r)/drivers/usb/serial/option.ko /lib/modules/$(uname -r)/kernel/drivers/usb/serial/`
  - `sudo depmod -a`
 
 #### Changing the USB730L to Enterprise Mode
@@ -61,9 +61,14 @@ Make sure that the `ping_config.json` is configured properly
 
 #### Installing `systemd` unit files
 While in the `miscellaneous/network_metrics` directory:
+ - 
  - `pip3 install pythonping`
  - `crontab -e` and command out the bottom lines for `lora-radio.sh`
- - `sudo cp modem_USB730L.service modem_USB730L.timer ping.service ping.timer rnode.service tncattach.service tncattach.timer /etc/systemd/system/`
+ - `cp ping/ping_configs/ping_config_$(hostname).json ping/ping_config.json`
+ - `sudo cp modem_USB730L/modem_USB730L.service modem_USB730L/modem_USB730L.timer /etc/systemd/system/`
+ - `sudo cp ping/ping.service ping/ping.timer /etc/systemd/system/`
+ - `sudo cp rnode/rnode.service /etc/systemd/system`
+ - `sudo cp tncattach/tncattach.service tncattach/tncattach.timer /etc/systemd/system`
  - `sudo systemctl daemon-reload`
  - `sudo systemctl enable ping.timer`
  - `sudo systemctl enable rnode.service`
