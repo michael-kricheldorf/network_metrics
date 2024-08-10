@@ -35,7 +35,7 @@ These commands were modified and updated to kernel version 5.15.0 from the instr
  - `sudo depmod -a`
 
 #### Changing the USB730L to Enterprise Mode
- - `sudo rmmod rndis_host`, device may freeze for a few minutes or lose connection, be patient
+ - `sudo rmmod rndis_host`, device may freez/usr/bin/python3 -ue for a few minutes or lose connection, be patient
 You can confirm by running the command `lsusb` and searching for the Novatel Wireless device. You should follow these instructions if it has a vendor:product number of `1410:9030`:
  - `sudo usb_modeswitch -v 0x1410 -p 0x9030 -u 4`
 

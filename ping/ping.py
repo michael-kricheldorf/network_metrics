@@ -7,13 +7,12 @@ import sqlite3
 import io
 import sys
 import os
-import pathlib
 import re
 import json
 
-script_path = pathlib.Path.cwd().name
-config_filename = "ping_config.json"
-database_filename = "/ping_log.db"
+script_path = os.path.abspath(os.path.dirname(__file__))
+config_filename = script_path + "/ping_config.json"
+database_filename = script_path + "/ping_log.db"
 table_name = "latency"
 
 # Create dictionary from JSON config file

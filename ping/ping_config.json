@@ -39,6 +39,45 @@
             ]
         },
         {
+            "alias":"henrietta",
+            "type":"nebula",
+            "address":"10.10.200.11",
+            "settings": [
+                {
+                    "payload_size": 64,
+                    "ping_count": 5,
+                    "timeout_after": 3,
+                    "interval": 0.5
+                }
+            ]
+        },
+        {
+            "alias":"bjorn",
+            "type":"nebula",
+            "address":"10.10.200.5",
+            "settings": [
+                {
+                    "payload_size": 64,
+                    "ping_count": 5,
+                    "timeout_after": 3,
+                    "interval": 0.5
+                }
+            ]
+        },
+        {
+            "alias":"annie",
+            "type":"nebula",
+            "address":"10.10.200.6",
+            "settings": [
+                {
+                    "payload_size": 64,
+                    "ping_count": 5,
+                    "timeout_after": 3,
+                    "interval": 0.5
+                }
+            ]
+        },
+        {
             "alias":"michael",
             "type":"nebula",
             "address":"10.10.200.13",

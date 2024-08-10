@@ -16,7 +16,7 @@ import os
 ip_format = [10, 10, 101]
 
 # script path and config init
-script_path = os.getcwd()
+script_path = os.path.abspath(os.path.dirname(__file__))
 config = {}
 
 # connect to SQL database

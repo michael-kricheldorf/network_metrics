@@ -17,7 +17,7 @@ import datetime
 import os
 import sqlite3
 
-script_path = os.getcwd()
+script_path = os.path.abspath(os.path.dirname(__file__))
 
 cmd_list = ['AT', 'AT+CIND?', 'AT+VZWRSRP?', 'AT+VZWRSRQ?']
 database_filename = script_path + "/modem_log.db"
