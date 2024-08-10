@@ -82,4 +82,3 @@ for cmd in cmd_list:
     con.commit()
     
 modem.close()
-sys.exit()
