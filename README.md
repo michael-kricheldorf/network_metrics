@@ -21,8 +21,7 @@ These commands were modified and updated to kernel version 5.15.0 from the instr
  - paste `#define NOVATELWIRELESS_PRODUCT_ENTERPRISE_U730L 0x9032` below the line `/* NOVATEL WIRELESS PRODUCTS */`
  - find the line `static const struct usb_device_id option_ids[ ]` by typing `/` to go into `search mode` and typing that statement. Press `ENTER` when its found
  - insert `{USB_DEVICE_AND_INTERFACE_INFO(NOVATELWIRELESS_VENDOR_ID, NOVATELWIRELESS_PRODUCT_ENTERPRISE_U730L, 0xff, 0x0, 0x0)},` at the top of the struct
- - `sudo cp option.c usb-wwan.h /usr/src/linux-headers-$(uname -r)/drivers/usb/serial/`
- #- `cd `
+ - `sudo cp /home/ubuntu/miscellaneous/network_metrics/modem_USB730L/option.c /home/ubuntu/miscellaneous/network_metrics/modem_USB730L/usb-wwan.h /usr/src/linux-headers-$(uname -r)/drivers/usb/serial/`
  - `sudo ln -fs /lib/modules/$(uname -r)/build /usr/src/linux-headers-$(uname -r)/`
  - `cd /lib/modules/$(uname -r)/build/drivers/usb/serial/`
  - `sudo cp Makefile Makefile-orig`
@@ -35,14 +34,11 @@ These commands were modified and updated to kernel version 5.15.0 from the instr
  - `sudo depmod -a`
 
 #### Changing the USB730L to Enterprise Mode
- - `sudo rmmod rndis_host`, device may freez/usr/bin/python3 -ue for a few minutes or lose connection, be patient
-You can confirm by running the command `lsusb` and searching for the Novatel Wireless device. You should follow these instructions if it has a vendor:product number of `1410:9030`:
- - `sudo usb_modeswitch -v 0x1410 -p 0x9030 -u 4`
+ - `sudo rmmod rndis_host`, device may freeze for a few minutes or lose connection, be patient
+ - run the command again to ensure `rndis_host` was properly removed
 
-If the vendor:product number is `1410:9032`, call the following command:
- - `sudo usb_modeswitch -v 0x1410 -p 0x9032 -u 4`
-
-Then reboot the device to ensure the changes have been made.
+ - `lsusb` and ensure that something like `Novatel Wireless MiFi USB730L` appears. If not, maybe try reconnecting the device to the gateway.
+ - `sudo usb_modeswitch -v 0x1410 -p 0x$(lsusb | grep '1410:\K903\d' -Po) -u 4`
  - `sudo reboot` <- find other command that doesn't require a whole reboot maybe
 
 #### Locating the USB730L 
