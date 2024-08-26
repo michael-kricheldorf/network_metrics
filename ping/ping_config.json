@@ -2,93 +2,51 @@
     "addresses": [
         {
             "alias":"diana",
-            "type":"lora-radio",
+            "interface":"tnc0",
             "address":"10.10.101.2",
-            "settings": [
-                {
-                    "payload_size": 32,
-                    "ping_count": 5,
-                    "timeout_after": 3,
-                    "interval": 0.5
-                },
-                {
-                    "payload_size": 64,
-                    "ping_count": 5,
-                    "timeout_after": 3,
-                    "interval": 1
-                },
-                {
-                    "payload_size": 128,
-                    "ping_count": 5,
-                    "timeout_after": 3,
-                    "interval": 2
-                }
-            ]
+            "pl_size": 64,
+            "timeout": 3,
+            "interval": 5
+        },
+        {
+            "alias":"lighthouse",
+            "interface":"nebula1",
+            "address":"10.10.200.1",
+            "pl_size": 64,
+            "timeout": 3,
+            "interval": 5
         },
         {
             "alias":"norvel",
-            "type":"nebula",
+            "interface":"nebula1",
             "address":"10.10.200.7",
-            "settings": [
-                {
-                    "payload_size": 64,
-                    "ping_count": 5,
-                    "timeout_after": 3,
-                    "interval": 0.5
-                }
-            ]
+            "pl_size": 64,
+            "timeout": 3,
+            "interval": 5
         },
         {
             "alias":"henrietta",
-            "type":"nebula",
+            "interface":"nebula1",
             "address":"10.10.200.11",
-            "settings": [
-                {
-                    "payload_size": 64,
-                    "ping_count": 5,
-                    "timeout_after": 3,
-                    "interval": 0.5
-                }
-            ]
+            "pl_size": 64,
+            "timeout": 3,
+            "interval": 5
         },
         {
             "alias":"bjorn",
-            "type":"nebula",
+            "interface":"nebula1",
             "address":"10.10.200.5",
-            "settings": [
-                {
-                    "payload_size": 64,
-                    "ping_count": 5,
-                    "timeout_after": 3,
-                    "interval": 0.5
-                }
-            ]
+            "pl_size": 64,
+            "timeout": 3,
+            "interval": 5
         },
         {
             "alias":"annie",
-            "type":"nebula",
+            "interface":"nebula1",
             "address":"10.10.200.6",
-            "settings": [
-                {
-                    "payload_size": 64,
-                    "ping_count": 5,
-                    "timeout_after": 3,
-                    "interval": 0.5
-                }
-            ]
-        },
-        {
-            "alias":"michael",
-            "type":"nebula",
-            "address":"10.10.200.13",
-            "settings": [
-                {
-                    "payload_size": 128,
-                    "ping_count": 5,
-                    "timeout_after": 3,
-                    "interval": 0.5
-                }
-            ]
+            "pl_size": 64,
+            "timeout": 3,
+            "interval": 5
         }
     ]
 }

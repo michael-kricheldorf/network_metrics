@@ -5,3 +5,9 @@ Description=Python 'ping.py' program that logs user-to-user latency
 Type=simple
 WorkingDirectory=/home/ubuntu/miscellaneous/network_metrics/ping
 ExecStart=/usr/bin/python3 -u /home/ubuntu/miscellaneous/network_metrics/ping/ping.py
+Restart=always
+TimeoutSec=120
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

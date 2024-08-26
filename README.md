@@ -38,10 +38,11 @@ These commands were modified and updated to kernel version 5.15.0 from the instr
  - run the command again to ensure `rndis_host` was properly removed
 
  - `lsusb` and ensure that something like `Novatel Wireless MiFi USB730L` appears. If not, maybe try reconnecting the device to the gateway.
- - `sudo usb_modeswitch -v 0x1410 -p 0x$(lsusb | grep '1410:\K903\d' -Po) -u 4`
+ - `sudo usb_modeswitch -v 0x1410 -p 0x$(lsusb | grep '1410:\K903\d' -Po) -u 4` <- this fried Annie? change instructions to first set it back to default mode then enterprise mode?
  - `sudo reboot` <- find other command that doesn't require a whole reboot maybe
 
 #### Locating the USB730L 
+ - `sudo dhclient $(ip a | grep 'enx[^:]*' -Po)`
  - run `lsusb` and find the display. make sure the product number is `9032` and not `9030`
  - `ip a` and find the modem interface, should be something like `enx0015ff030033`
  - `sudo dhclient enx0015ff030033`
@@ -49,21 +50,21 @@ These commands were modified and updated to kernel version 5.15.0 from the instr
  - If it displays, woohoo! Ready for [[AT Commands]], if not, then scream and pull the fire alarm
 
 ### Setting up logging scripts
- - `sudo rm -rf tncattach`
- - `git clone https://github.com/michael-kricheldorf/tncattach.git`
+ <!-- - `sudo rm -rf tncattach`
+ - `git clone https://github.com/michael-kricheldorf/tncattach.git` -->
  - `cd tncattach`
  - `make`
  - `sudo make install`
- - `cd ~/miscellaneous`
+ <!-- - `cd ~/miscellaneous`
  - `git clone https://github.com/michael-kricheldorf/network_metrics.git`
-
+ -->
 
 Make sure that the `ping_config.json` is configured properly
 
 #### Installing `systemd` unit files
 While in the `miscellaneous/network_metrics` directory:
  - 
- - `pip3 install pythonping`
+ - `sudo pip3 install pythonping`
  - `crontab -e` and command out the bottom lines for `lora-radio.sh`
  - `cp ping/ping_configs/ping_config_$(hostname).json ping/ping_config.json`
  - `sudo cp modem_USB730L/modem_USB730L.service modem_USB730L/modem_USB730L.timer /etc/systemd/system/`

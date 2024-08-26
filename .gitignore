@@ -1,0 +1,2 @@
+# ignore any of the sqlite3 databases
+*.db

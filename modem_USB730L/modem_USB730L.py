@@ -11,18 +11,15 @@ TODO: split each cmd into its own table
 TODO: add cmd line support for changing device port, e.g. /dev/ttyUSB0
 '''
 
+'''imports'''
 import serial
 import time
 import datetime
 import os
 import sqlite3
+import json
 
-script_path = os.path.abspath(os.path.dirname(__file__))
-
-cmd_list = ['AT', 'AT+CIND?', 'AT+VZWRSRP?', 'AT+VZWRSRQ?']
-database_filename = script_path + "/modem_log.db"
-table_name = "modem"
-
+'''functions'''
 def split_response(r):
     spl = r.split('\n')
     j = 0
@@ -45,40 +42,65 @@ def is_final_result(r):
         return True
     return False
 
-# setup modem serial comm
-modem = serial.Serial(port='/dev/ttyUSB0', baudrate=115200, bytesize=8, parity='N', stopbits=1, timeout=1, xonxoff=False, rtscts=False, dsrdtr=False)
+'''init'''
+script_path = os.path.abspath(os.path.dirname(__file__))
+config_path = script_path + "/modem_config.json"
 
-# connect to SQL database
-con = sqlite3.connect(database_filename)
+# load JSON config file
+config = {}
+try:
+    with open(config_path, 'r') as file:
+        config = json.load(file)
+except:
+    print("Error opening JSON file: ", config_path)
+
+# load SQL database and tables
+db_name = config['db_name']
+db_path = script_path + db_name
+try:
+    con = sqlite3.connect(db_path, check_same_thread=False)
+except:
+    print("Could not find " + db_path + ". Creating '" + db_name + "' in this directory.")
+    f = open(db_name, "x")
+    f.close()
+    con = sqlite3.connect(db_name, check_same_thread=False)
 cur = con.cursor()
 
-# create table if it doesn't already exist
-cur.execute("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='{0}';".format(table_name))
-if (cur.fetchone()[0] == 0):
-    cur = con.execute("CREATE TABLE {0}(DATETIME text, COMMAND text, RESPONSE text);".format(table_name))
+for entry in config['commands']:
+    # create table if it doesn't already exist
+    cur.execute("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='{0}';".format(entry['table']))
+    if (cur.fetchone()[0] == 0):
+        cur = con.execute("CREATE TABLE {0}(DATETIME text, COMMAND text, RESPONSE text);".format(entry['table']))
 
-for cmd in cmd_list:
-    # write and read AT commands
-    response = ""
-    cmd += "\r"
-    modem.write(cmd.encode())
-    while True:
-        response += modem.read(1024).decode()
-        if (is_final_result(response)):
-            break
+# setup modem serial comm
+modem = serial.Serial(port=config['port'], baudrate=115200, bytesize=8, parity='N', stopbits=1, timeout=1, xonxoff=False, rtscts=False, dsrdtr=False)
 
-    # split response into first and second values (as far as I know, no other values are needed for now)
-    spl = split_response(response)
+'''main'''
+while True:
+    for entry in config['commands']:
+        cmd = entry['command']
+        table = entry['table']
+        # write and read AT commands
+        response = ""
+        cmd += "\r"
+        modem.write(cmd.encode())
+        while True:
+            response += modem.read(1024).decode()
+            if (is_final_result(response)):
+                break
 
-    spl_cmd = spl[0]
-    spl_resp = spl[1]
+        # split response into first and second values (as far as I know, no other values are needed for now)
+        spl = split_response(response)
 
-    # collect current datetime 
-    t = datetime.datetime.now(datetime.timezone.utc)
-    return_string = "INSERT INTO {0} VALUES ('{1}', '{2}', '{3}');".format(
-        table_name, t.strftime("%Y-%m-%d %H:%M:%S"), spl_cmd, spl_resp)    
-    print(return_string)
-    cur = con.execute(return_string)
-    con.commit()
-    
+        spl_cmd = spl[0]
+        spl_resp = spl[1]
+
+        # collect current datetime 
+        t = datetime.datetime.now(datetime.timezone.utc)
+        return_string = "INSERT INTO {0} VALUES ('{1}', '{2}', '{3}');".format(
+            entry['table'], t.strftime("%Y-%m-%d %H:%M:%S"), spl_cmd, spl_resp)    
+        print(return_string)
+        cur = con.execute(return_string)
+        con.commit()
+    time.sleep(config["interval"])
 modem.close()
