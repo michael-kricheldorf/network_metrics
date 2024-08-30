@@ -8,7 +8,10 @@ Clone this repository into the `miscellaneous` directory of the gateway, and the
  - `sudo apt-get upgrade`
  - `sudo reboot`
  - `sudo ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime`
- - `sudo apt-get install tzdata libncurses-dev flex bison openssl libssl-dev dkms libelf-dev libudev-dev libpci-dev libiberty-dev autoconf usb-modeswitch dwarves`
+ - `sudo apt-get install tzdata libncurses-dev flex bison openssl libssl-dev dkms libelf-dev libudev-dev libpci-dev libiberty-dev autoconf usb-modeswitch dwarves ntp`
+ - `sudo service ntp stop`
+ - `sudo ntpd -gq`
+ - `sudo service ntp start`
 
 #### Setting up the USB730L Driver
 These commands were modified and updated to kernel version 5.15.0 from the instructions found on [Verizon's USB730L Integration Guide](https://scache.vzw.com/dam/support/pdf/verizon-usb730l-integration-guide.pdf)

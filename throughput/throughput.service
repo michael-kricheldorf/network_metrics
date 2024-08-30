@@ -1,0 +1,13 @@
+[Unit]
+Description=Python 'throughput.py' to track throughput from `/proc/net/dev`
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ubuntu/miscellaneous/network_metrics/throughput
+ExecStart=/usr/bin/python3 -u /home/ubuntu/miscellaneous/network_metrics/throughput/throughput.py
+Restart=always
+TimeoutSec=120
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
