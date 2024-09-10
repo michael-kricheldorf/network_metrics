@@ -13,27 +13,28 @@ dt=$(date '+%d-%m-%Y_%H%M%S');
 
 # ------ ALL ------
 sed -i '/deb-src http://us.archive.ubuntu.com/ubuntu jammy main restricted/s/^#//g' /etc/apt/sources.list
-# sudo apt-get update -y
-# sudo ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
-# sudo apt-get install tzdata libncurses-dev flex bison openssl libssl-dev dkms libelf-dev libudev-dev libpci-dev libiberty-dev autoconf usb-modeswitch dwarves ntp -y
-# sudo service ntp stop
-# sudo ntpd -gq
-# sudo service ntp start
+sudo apt-get update -y
+sudo ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
+sudo apt-get install tzdata libncurses-dev flex bison openssl libssl-dev dkms libelf-dev libudev-dev libpci-dev libiberty-dev autoconf usb-modeswitch dwarves ntp -y
+sudo service ntp stop
+sudo ntpd -gq
+sudo service ntp start
 
 # create a network metrics folder if it doesn't exist and create the log databases
 if [[ ! -e "$log_dir" ]]; then
     sudo mkdir $log_dir
     sudo mkdir $log_dir/old
-    sudo touch $log_dir/ping_log.db
-    sudo touch $log_dir/modem_log.db
-    sudo touch $log_dir/rnode_log.db
-    sudo touch $log_dir/throughput_log.db
 else # copy over all of the old log files if they exist to the /old/ subdir
-    sudo cp $log_dir/ping_log.db "$log_dir/old/ping_log_$dt.db"  > /dev/null 2>&1
-    sudo cp $log_dir/modem_log.db "$log_dir/old/modem_log_$dt.db"  > /dev/null 2>&1
-    sudo cp $log_dir/rnode_log.db "$log_dir/old/rnode_log_$dt.db"  > /dev/null 2>&1
-    sudo cp $log_dir/throughput_log.db "$log_dir/old/throughput_log_$dt.db"  > /dev/null 2>&1
+    sudo mv $log_dir/ping_log.db "$log_dir/old/ping_log_$dt.db"  > /dev/null 2>&1
+    sudo mv $log_dir/modem_log.db "$log_dir/old/modem_log_$dt.db"  > /dev/null 2>&1
+    sudo mv $log_dir/rnode_log.db "$log_dir/old/rnode_log_$dt.db"  > /dev/null 2>&1
+    sudo mv $log_dir/throughput_log.db "$log_dir/old/throughput_log_$dt.db"  > /dev/null 2>&1
 fi
+
+sudo touch $log_dir/ping_log.db
+sudo touch $log_dir/modem_log.db
+sudo touch $log_dir/rnode_log.db
+sudo touch $log_dir/throughput_log.db
 
 # move any old log files from main git repo dir into the old/ subdir
 for file in ./*/*.db; do
@@ -42,6 +43,11 @@ for file in ./*/*.db; do
     mv "$file" $log_dir/old/
     mv "$log_dir/old/$strpd_path" $log_dir/old/"$new_name"
 done
+
+# remove the old repository and git clone the updated one
+rm /home/ubuntu/miscellaneous/network_metrics
+git clone https://github.com/michael-kricheldorf/network_metrics.git /home/ubuntu/miscellaneous/
+cd /home/ubuntu/miscellaneous/network_metrics
 
 # ------ PING SETUP ------
 sudo cp ./ping/ping_configs/ping_config_$(hostname).json ./ping/ping_config.json 
@@ -52,10 +58,10 @@ sudo systemctl enable ping.service
 sudo systemctl start ping.service
 
 # # ------ MODEM SETUP ------
-# sudo cp ./modem_USB730L/modem_USB730L.service /etc/systemd/system/modem_USB730L.service
-# sudo systemctl daemon-reload
-# sudo systemctl enable modem_USB730L.service
-# sudo systemctl start modem_USB730L.service
+sudo cp ./modem_USB730L/modem_USB730L.service /etc/systemd/system/modem_USB730L.service
+sudo systemctl daemon-reload
+sudo systemctl enable modem_USB730L.service
+sudo systemctl start modem_USB730L.service
 
 # ------ RNODE SETUP ------
 sudo cp ./rnode/rnode.service /etc/systemd/system/rnode.service
