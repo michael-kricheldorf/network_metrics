@@ -12,7 +12,7 @@ dt=$(date '+%d-%m-%Y_%H%M%S');
 # take -m as argument to install modem_USB730L software
 
 # ------ ALL ------
-sed -i '/deb-src http://us.archive.ubuntu.com/ubuntu jammy main restricted/s/^#//g' /etc/apt/sources.list
+sed -i '/deb-src http://us.archive.ubuntu.com/ubuntu jammy main restricted/s/^#//g' /etc/apt/sources.list > /dev/null 2>&1
 sudo apt-get update -y
 sudo ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 sudo apt-get install tzdata libncurses-dev flex bison openssl libssl-dev dkms libelf-dev libudev-dev libpci-dev libiberty-dev autoconf usb-modeswitch dwarves ntp -y
@@ -25,9 +25,9 @@ if [[ ! -e "$log_dir" ]]; then
     sudo mkdir $log_dir
     sudo mkdir $log_dir/old
 else # copy over all of the old log files if they exist to the /old/ subdir
-    sudo mv $log_dir/ping_log.db "$log_dir/old/ping_log_$dt.db"  > /dev/null 2>&1
-    sudo mv $log_dir/modem_log.db "$log_dir/old/modem_log_$dt.db"  > /dev/null 2>&1
-    sudo mv $log_dir/rnode_log.db "$log_dir/old/rnode_log_$dt.db"  > /dev/null 2>&1
+    sudo mv $log_dir/ping_log.db "$log_dir/old/ping_log_$dt.db" > /dev/null 2>&1
+    sudo mv $log_dir/modem_log.db "$log_dir/old/modem_log_$dt.db" > /dev/null 2>&1
+    sudo mv $log_dir/rnode_log.db "$log_dir/old/rnode_log_$dt.db" > /dev/null 2>&1
     sudo mv $log_dir/throughput_log.db "$log_dir/old/throughput_log_$dt.db"  > /dev/null 2>&1
 fi
 
@@ -45,8 +45,8 @@ for file in ./*/*.db; do
 done
 
 # remove the old repository and git clone the updated one
-rm /home/ubuntu/miscellaneous/network_metrics
-git clone https://github.com/michael-kricheldorf/network_metrics.git /home/ubuntu/miscellaneous/
+sudo rm -rf /home/ubuntu/miscellaneous/network_metrics
+git clone https://github.com/michael-kricheldorf/network_metrics.git /home/ubuntu/miscellaneous/network_metrics
 cd /home/ubuntu/miscellaneous/network_metrics
 
 # ------ PING SETUP ------

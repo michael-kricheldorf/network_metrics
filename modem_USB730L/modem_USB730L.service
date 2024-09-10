@@ -10,4 +10,4 @@ TimeoutSec=120
 RestartSec=5 
  
 [Install] 
-WantedBy=multi-user.target[Service] 
+WantedBy=multi-user.target
