@@ -2,7 +2,7 @@
     "addresses": [
         {
             "alias":"github",
-            "type":"lte-modem",
+            "interface":"enx0015ff080733",
             "address":"github.com",
             "pl_size": 64,
             "timeout": 3,
@@ -10,7 +10,7 @@
         },
         {
             "alias":"virginia-tech",
-            "type":"lte-modem",
+            "interface":"enx0015ff080733",
             "address":"vt.edu",
             "pl_size": 64,
             "timeout": 3,
@@ -18,7 +18,7 @@
         },
         {
             "alias":"norvel",
-            "type":"lora-radio",
+            "interface":"tnc0",
             "address":"10.10.101.1",
             "pl_size": 64,
             "timeout": 5,
@@ -26,7 +26,7 @@
         },
         {
             "alias":"lighthouse",
-            "type":"nebula",
+            "interface":"nebula1",
             "address":"10.10.200.1",
             "pl_size": 64,
             "timeout": 3,

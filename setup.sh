@@ -44,6 +44,8 @@ for file in ./*/*.db; do
     mv "$log_dir/old/$strpd_path" $log_dir/old/"$new_name"
 done
 
+sudo find /var/log/network_metrics/old/* -size 0 -delete
+
 # remove the old repository and git clone the updated one
 sudo rm -rf /home/ubuntu/miscellaneous/network_metrics
 git clone https://github.com/michael-kricheldorf/network_metrics.git /home/ubuntu/miscellaneous/network_metrics
@@ -74,4 +76,3 @@ sudo cp ./throughput/throughput.service /etc/systemd/system/throughput.service
 sudo systemctl daemon-reload
 sudo systemctl enable throughput.service
 sudo systemctl start throughput.service
-

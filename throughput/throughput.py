@@ -45,7 +45,7 @@ script_path = os.path.abspath(os.path.dirname(__file__))
 # db_path = script_path + db_name
 db_path = "/var/log/network_metrics/throughput_log.db"
 table_name = "throughput"
-interface_list = ["tnc0", "nebula1", "enp2s0"]
+interface_list = ["tnc0", "nebula1", "enp2s0", "enx0015ff025968", "enx0015ff170646", "enx0015ff080733", "enx0015ff030033", "tnc1"]
 
 # connect to SQL database
 try:
