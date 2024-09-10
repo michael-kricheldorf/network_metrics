@@ -20,9 +20,13 @@ script_path = os.path.abspath(os.path.dirname(__file__))
 config = {}
 
 # connect to SQL database
-database_file = script_path + '/rnode_log.db'
+db_path = "/var/log/network_metrics/rnode_log.db"
 table_name = 'rssi'
-con = sqlite3.connect(database_file)
+try:
+    con = sqlite3.connect(db_path, check_same_thread=False)
+except:
+    print("Could not find " + db_path + ". Exiting program.")
+    sys.exit(1)
 cur = con.cursor()
 
 # create table if it doesn't already exist

@@ -41,20 +41,18 @@ def read_dev(db, intf_list):
 '''init'''
 # initialize paths
 script_path = os.path.abspath(os.path.dirname(__file__))
-db_name = "/throughput_log.db"
-db_path = script_path + db_name
+# db_name = "/throughput_log.db"
+# db_path = script_path + db_name
+db_path = "/var/log/network_metrics/throughput_log.db"
 table_name = "throughput"
 interface_list = ["tnc0", "nebula1", "enp2s0"]
 
-# load SQL database
+# connect to SQL database
 try:
-    con = sqlite3.connect(db_path)
+    con = sqlite3.connect(db_path, check_same_thread=False)
 except:
-    print("Could not find " + db_path + ". Creating '" + db_name + "' in this directory.")
-    f = open(db_name, "x")
-    f.close()
-    con = sqlite3.connect(db_name)
-
+    print("Could not find " + db_path + ". Exiting program.")
+    sys.exit(1)
 cur = con.cursor()
 
 # create table if it doesn't already exist

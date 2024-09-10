@@ -2,6 +2,8 @@ This repo was made to log ping latencies, RNode Last Received RSSI's, and USB730
 
 Clone this repository into the `miscellaneous` directory of the gateway, and the assumption is that the gateway has the username `ubuntu`
 
+This readme file is not 100% accurate and there are some inconsistencies that have arised between machines.
+
 #### Update and Install Dependencies (or nothing will work!)
  - `sudo vi /etc/apt/sources.list` and then uncomment the first line starting with deb-src
  - `sudo apt-get update`

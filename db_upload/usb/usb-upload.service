@@ -1,0 +1,10 @@
+[Unit]
+Description=Runs a script that automatically copies over databases of a pre-specified file path
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ubuntu/miscellaneous/network_metrics/db_upload/usb/
+ExecStart=/home/ubuntu/miscellaneous/network_metrics/db_upload/usb/upload.sh
+
+[Install]
+WantedBy=multi-user.target

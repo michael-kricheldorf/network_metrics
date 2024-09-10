@@ -18,6 +18,7 @@ import datetime
 import os
 import sqlite3
 import json
+import sys
 
 '''functions'''
 def split_response(r):
@@ -55,15 +56,21 @@ except:
     print("Error opening JSON file: ", config_path)
 
 # load SQL database and tables
-db_name = config['db_name']
-db_path = script_path + db_name
+db_path = "/var/log/network_metrics/modem_log.db"
 try:
     con = sqlite3.connect(db_path, check_same_thread=False)
 except:
-    print("Could not find " + db_path + ". Creating '" + db_name + "' in this directory.")
-    f = open(db_name, "x")
-    f.close()
-    con = sqlite3.connect(db_name, check_same_thread=False)
+    print("Could not find " + db_path + ". Exiting program.")
+    sys.exit(1)
+# db_name = config['db_name']
+# db_path = script_path + db_name
+# try:
+#     con = sqlite3.connect(db_path, check_same_thread=False)
+# except:
+#     print("Could not find " + db_path + ". Creating '" + db_name + "' in this directory.")
+#     f = open(db_name, "x")
+#     f.close()
+#     con = sqlite3.connect(db_name, check_same_thread=False)
 cur = con.cursor()
 
 for entry in config['commands']:

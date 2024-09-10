@@ -1,0 +1,1 @@
+ACTION=="add", SUBSYSTEMS=="usb", ENV{SYSTEMD_WANTS}="usb-upload.service"
