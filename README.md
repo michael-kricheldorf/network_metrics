@@ -15,6 +15,23 @@ This readme file is not 100% accurate and there are some inconsistencies that ha
  - `sudo ntpd -gq`
  - `sudo service ntp start`
 
+#### updated script to setup/update/fix usb730L driver
+
+`sudo cp /home/ubuntu/miscellaneous/network_metrics/modem_USB730L/option.c /home/ubuntu/miscellaneous/network_metrics/modem_USB730L/usb-wwan.h /usr/src/linux-headers-$(uname -r)/drivers/usb/serial/`
+`sudo ln -fs /lib/modules/$(uname -r)/build /usr/src/linux-headers-$(uname -r)/`
+`cd /lib/modules/$(uname -r)/build/drivers/usb/serial/`
+if Makefile-orig doesn't exist, then copy `sudo cp Makefile Makefile-orig`
+`sudo rm Makefile Module.symvers modules.order option.ko option.mod* option.o`
+`sudo touch Makefile`
+`echo "obj-m += option.o" | sudo tee Makefile`
+`cd /lib/modules/$(uname -r)/build`
+[`sudo cp /sys/kernel/btf/vmlinux /usr/lib/modules/$(uname -r)/build`](https://askubuntu.com/questions/1348250/skipping-btf-generation-xxx-due-to-unavailability-of-vmlinux-on-ubuntu-21-04)
+`sudo make -C /lib/modules/$(uname -r)/build M=/usr/src/linux-headers-$(uname -r)/drivers/usb/serial/`
+`sudo cp /usr/src/linux-headers-$(uname -r)/drivers/usb/serial/option.ko /lib/modules/$(uname -r)/kernel/drivers/usb/serial/`
+`sudo depmod -a`
+`sudo rmmod rndis_host`
+`sudo usb_modeswitch -v 0x1410 -p 0x$(lsusb | grep '1410:\K903\d' -Po) -u 4`
+`sudo reboot`
 #### Setting up the USB730L Driver
 These commands were modified and updated to kernel version 5.15.0 from the instructions found on [Verizon's USB730L Integration Guide](https://scache.vzw.com/dam/support/pdf/verizon-usb730l-integration-guide.pdf)
 

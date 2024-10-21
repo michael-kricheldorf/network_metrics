@@ -5,7 +5,7 @@ LoRa radio, then use the `/usb` directory instructions, but if it has good conne
 
 ##### `/usb` instructions
 1. `sudo mkdir /media/usb/`
-2. `sudo cp ./usb/usb-upload.rule /etc/udev/rules.d/usb-upload.rule`
+2. `sudo cp ./usb/usb-upload.rules /etc/udev/rules.d/usb-upload.rules`
 3. `sudo udevadm control --reload-rules`
 4. `sudo cp ./usb/usb-upload.service /etc/systemd/system/` 
 5. `sudo systemctl daemon-reload`

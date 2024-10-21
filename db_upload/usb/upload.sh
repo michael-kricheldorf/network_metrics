@@ -22,10 +22,10 @@ do
         echo "Found SanDisk USB and mounted. Please do not remove the device."
         sudo mkdir /media/usb/$(hostname) > /dev/null 2>&1
 
-        sudo cp /home/ubuntu/miscellaneous/network_metrics/modem_USB730L/modem_log.db /media/usb/$(hostname)/
-        sudo cp /home/ubuntu/miscellaneous/network_metrics/rnode/rnode_log.db /media/usb/$(hostname)/
-        sudo cp /home/ubuntu/miscellaneous/network_metrics/ping/ping_log.db /media/usb/$(hostname)/
-        sudo cp /home/ubuntu/miscellaneous/network_metrics/throughput/throughput_log.db /media/usb/$(hostname)/
+        sudo cp /var/log/network_metrics/modem_log.db /media/usb/$(hostname)/
+        sudo cp /var/log/network_metrics/rnode/rnode_log.db /media/usb/$(hostname)/
+        sudo cp /var/log/network_metrics/ping/ping_log.db /media/usb/$(hostname)/
+        sudo cp /var/log/network_metrics/throughput/throughput_log.db /media/usb/$(hostname)/
 
         # modify to unmount all the possible usb devices
         sudo umount /dev/$i

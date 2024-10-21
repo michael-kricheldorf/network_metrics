@@ -15,7 +15,7 @@ dt=$(date '+%d-%m-%Y_%H%M%S');
 sed -i '/deb-src http://us.archive.ubuntu.com/ubuntu jammy main restricted/s/^#//g' /etc/apt/sources.list > /dev/null 2>&1
 sudo apt-get update -y
 sudo ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
-sudo apt-get install tzdata libncurses-dev flex bison openssl libssl-dev dkms libelf-dev libudev-dev libpci-dev libiberty-dev autoconf usb-modeswitch dwarves ntp -y
+sudo apt-get install tzdata libncurses-dev flex bison openssl libssl-dev dkms libelf-dev libudev-dev libpci-dev libiberty-dev autoconf usb-modeswitch dwarves ntp mosh rsync -y
 sudo service ntp stop
 sudo ntpd -gq
 sudo service ntp start

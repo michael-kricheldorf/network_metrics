@@ -7,22 +7,6 @@
             "pl_size": 64,
             "timeout": 3,
             "interval": 5
-        },
-        {
-            "alias":"github",
-            "interface":"tnc0",
-            "address":"github.com",
-            "pl_size": 64,
-            "timeout": 3,
-            "interval": 5
-        },
-        {
-            "alias":"virginia-tech",
-            "interface":"tnc0",
-            "address":"vt.edu",
-            "pl_size": 64,
-            "timeout": 3,
-            "interval": 5
         }
     ]
 }
