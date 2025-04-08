@@ -1,3 +1,4 @@
 # ignore any of the sqlite3 databases
 *.db
 to-mia.tar.gz
+pping/pping/*

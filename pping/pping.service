@@ -1,0 +1,14 @@
+[Unit]
+Description=Calls pping command to collect "passive ping" measurements of latency 
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ubuntu/miscellaneous/network_metrics/pping/pping
+ExecStart=/home/ubuntu/miscellaneous/network_metrics/pping/pping/pping -i "enp2s0"
+StandardOutput=append:/home/ubuntu/miscellaneous/network_metrics/pping/pping.log
+Restart=always
+TimeoutSec=120
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
